@@ -16,7 +16,6 @@ public class Connector {
 	static {
 		try {
 			Class.forName(DRIVER_NAME);
-			System.out.println("로드잘됨!");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -24,7 +23,10 @@ public class Connector {
 	}
 	public static Connection open() {
 		try {
-			return DriverManager.getConnection(URL,ID,PWD);//캐치에서 아무것도 리턴하지 않기 때문에 리턴에 널을 넣어준다.
+		//	return DriverManager.getConnection(URL,ID,PWD);//캐치에서 아무것도 리턴하지 않기 때문에 리턴에 널을 넣어준다.
+			Connection con = DriverManager.getConnection(URL,ID,PWD);
+			con.setAutoCommit(false);
+			return con;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -32,8 +34,7 @@ public class Connector {
 	}
 	public static void main(String[] args) {
 		Connection con = open();
-			try {
-				
+			try {	
 			Statement stmt = con.createStatement();
 			String sql = "select l_num, l_lentdate, m_num, b_num from lent ";
 			ResultSet rs = stmt.executeQuery(sql);

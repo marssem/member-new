@@ -42,7 +42,7 @@ public class BookDAOImpl implements BookDAO {
 				e.printStackTrace();
 			}
 		}
-		return 0;
+		return result;
 	}
 
 	public int updateBook(Map<String, Object> Book) {
@@ -191,13 +191,13 @@ public class BookDAOImpl implements BookDAO {
 		map.put("b_title", "자바의정석");
 		map.put("b_author", "남궁성");
 		map.put("b_dmc", "광고 오진다.");
-		/* bdao.insertBook(map);
+		bdao.insertBook(map);
 		 List<Map<String,Object>> bookList = bdao.selectBookList(map); 
-		System.out.println(bdao.selectBook(bNum));*/
+	//	System.out.println(bdao.selectBook(bNum));
 	/*	int result = bdao.deleteBook(22);
 		System.out.println("삭제 갯수 : " +result); */
-		map.put("b_num", 2);
-		int result = bdao.updateBook(map);
-		System.out.println("수정 갯수 :" + result);
+	//	map.put("b_num", 2);
+	//	int result = bdao.updateBook(map);
+	//	System.out.println("수정 갯수 :" + result);
 	}
 }

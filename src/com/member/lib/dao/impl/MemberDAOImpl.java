@@ -211,10 +211,10 @@ public class MemberDAOImpl implements MemberDAO {
 		
 		//	List<Map<String, Object>> memberList = mdao.selectMemberList(map);
 			
-		//	System.out.println(mdao.selectMemvber(2));
+	//		System.out.println(mdao.selectMember(41));
 			
-			int result = mdao.deleteMember(2);
-			System.out.println("삭제 갯 수 : "+result);
+	//		int result = mdao.deleteMember(2);
+	//		System.out.println("삭제 갯 수 : "+result);
 		
 		//	map.put("m_num", 2);
 		//	int result = mdao.updateMember(map);

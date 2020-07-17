@@ -17,7 +17,7 @@ public class LentDAOImpl implements LentDAO {
 	public int insertLent(Map<String, Object> Lent) {
 		Connection con = null;
 		PreparedStatement ps = null;
-		ResultSet rs = null;
+		int result = 0;
 		try {
 			con = Connector.open();
 			String sql = "insert into Lent(l_num, l_lentdate, m_num, b_num ) ";
@@ -25,16 +25,11 @@ public class LentDAOImpl implements LentDAO {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, Lent.get("m_num").toString());
 			ps.setString(2, Lent.get("b_num").toString());
-			rs = ps.executeQuery();
+			result = ps.executeUpdate();
 			con.commit();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-			try {
-				if(rs!=null) rs.close();
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
 			try {
 				if(ps!=null) ps.close();
 			}catch(Exception e) {
@@ -46,7 +41,7 @@ public class LentDAOImpl implements LentDAO {
 				e.printStackTrace();
 			}
 		}
-		return 0;
+		return result;
 	}
 
 	 
@@ -159,6 +154,7 @@ public class LentDAOImpl implements LentDAO {
 
 	 
 	public Map<String, Object> selectLent(int lNum) {
+		
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -167,7 +163,6 @@ public class LentDAOImpl implements LentDAO {
 		String sql = "select l_num, l_lentdate, l_recdate, m_num, b_num from lent where l_num=?";
 		ps = con.prepareStatement(sql);
 		ps.setInt(1, lNum);
-		rs = ps.executeQuery();
 		if(rs.next()) {
 			Map<String, Object> map = new HashMap<>();
 			map.put("l_num", rs.getInt("l_num"));

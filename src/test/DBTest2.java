@@ -13,6 +13,8 @@ public class DBTest2{
 			while(rs.next()) {
 				System.out.println(rs.getInt("num")+","+rs.getString("name")+","+rs.getString("etc"));
 			}
+				if(rs!=null)rs.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

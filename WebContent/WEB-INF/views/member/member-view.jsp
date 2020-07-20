@@ -10,19 +10,25 @@
 <body>
 <table border="1">
 	<tr>
+		<th>번호</th>
+		<td>${member.m_num}</td>
+	</tr>
+		<tr>
 		<th>이름</th>
+		<td>${member.m_name}</td>
+	</tr>
+		<tr>
 		<th>아이디</th>
-		<th>패스워드</th>
+		<td>${member.m_id}</td>
+	</tr>
+		<tr>
+		<th>비밀번호</th>
+		<td>${member.m_pwd}</td>
+	</tr>
+		<tr>
 		<th>가입일</th>
+		<td>${member.m_joindate}</td>
 	</tr>
-<c:forEach items='${memberList}' var="member">
-	<tr>
-		<th>${member.m_name}</th>
-		<th><a href="/member/view?m_num=${member.m_num}">${member.m_id}</a></th>
-		<th>${member.m_pwd}</th>
-		<th>${member.m_joindate}</th>
-	</tr>
-</c:forEach>
 </table>
 </body>
 </html>

@@ -28,8 +28,9 @@ public class MemberServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String uri = request.getRequestURI();
 		String str = "";
+		String uri = request.getRequestURI();
+		
 		// String obj = "123";
 		if ("/member/list".equals(uri)) {
 			List<Map<String, Object>> memberList = memberService.selectMemberList(null);
@@ -69,7 +70,22 @@ public class MemberServlet extends HttpServlet {
 			member.put("m_pwd", mPwd);
 			Map<String, Object> rMap = memberService.insertMember(member);
 			doProcess(response, rMap.toString());
+		}else if("/member/update".equals(uri)) {
+			String mName = request.getParameter("m_name");
+			String mId = request.getParameter("m_id");
+			String mPwd = request.getParameter("m_pwd");
+			int mNum = Integer.parseInt(request.getParameter("m_num"));
+			Map<String, Object> member = new HashMap<>();
+			member.put("m_name", mName);
+			member.put("m_id", mId);
+			member.put("m_pwd", mPwd);
+			member.put("m_num", mNum);
+			doProcess(response, memberService.updateMember(member).toString());
+		}else if("/member/delete".equals(uri)) {
+			int mNum = Integer.parseInt(request.getParameter("m_num"));
+			doProcess(response, memberService.deleteMember(mNum).toString());
 		}
+		
 	}
 
 }

@@ -30,6 +30,11 @@ public class BookDAOImpl implements BookDAO {
 			con.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			try {
 				if (ps != null) {

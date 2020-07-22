@@ -117,7 +117,9 @@ public class LentDAOImpl implements LentDAO {
 		ResultSet rs = null;
 		try {
 			con = Connector.open();
-			String sql = "select l_num, l_lentdate, l_recdate, m_num, b_num from lent ";
+			String sql = "select l.*, m.m_name, b.b_title from lent l, member m, book b\r\n" + 
+					"where l.m_num=m.m_num\r\n" + 
+					"and b.b_num=l.b_num;";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while(rs.next()) {
@@ -127,6 +129,8 @@ public class LentDAOImpl implements LentDAO {
 				map.put("l_recdate", rs.getString("l_recdate"));
 				map.put("m_num", rs.getString("m_num"));
 				map.put("b_num", rs.getString("b_num"));
+				map.put("m_name", rs.getString("m_name"));
+				map.put("b_title", rs.getString("b_title"));
 				LentList.add(map);
 
 			}
@@ -193,6 +197,47 @@ public class LentDAOImpl implements LentDAO {
 		}
 		return null;
 	}
+
+	@Override
+	public List<Map<String, Object>> selectNoLentBookList() {
+		List<Map<String, Object>> LentList = new ArrayList<>();
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			con = Connector.open();
+			String sql = "select b_num, b_title from book\r\n" + 
+					"where b_num not in(select b_num from lent\r\n" + 
+					"where l_recdate is null)";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				Map<String, Object> map = new HashMap<>();
+				map.put("b_num", rs.getInt("b_num"));
+				map.put("b_title", rs.getString("b_title"));
+				LentList.add(map);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if(ps!=null) ps.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if(con!=null) con.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return LentList;
+	}
 	public static void main(String[] args) {
 		LentDAOImpl mdao = new LentDAOImpl();
 		Map<String, Object> map = new HashMap<>();
@@ -211,4 +256,6 @@ public class LentDAOImpl implements LentDAO {
 		//	int result = mdao.updateLent(map);
 		//	System.out.println("수정 갯수 :" + result);
 	}
+
+
 }

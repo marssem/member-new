@@ -5,14 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>도서 목록</title>
 </head>
 <body>
 <table border="1">
 	<tr>
-		<th>책이름</th>
+		<th>도서명</th>
 		<th>저자</th>
-		<th>작성일</th>
+		<th>출판일</th>
 		<th>기타</th>
 	</tr>
 <c:forEach items='${bookList}' var="book">
@@ -25,6 +25,6 @@
 </c:forEach>
 
 </table>
-<a href="/views/book/book-insert"><button>책 등록</button></a>
+<a href="/views/book/book-insert"><button>도서 등록</button></a>
 </body>
 </html>

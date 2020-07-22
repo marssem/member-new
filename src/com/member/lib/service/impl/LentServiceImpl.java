@@ -7,15 +7,15 @@ import java.util.Map;
 
 import com.member.lib.dao.LentDAO;
 import com.member.lib.dao.impl.LentDAOImpl;
-import com.member.lib.service.LentServiceDAO;
+import com.member.lib.service.LentService;
 
-public class LentServiceDAOImpl implements LentServiceDAO {
+public class LentServiceImpl implements LentService {
 
 	 private LentDAO lentDAO = new LentDAOImpl();
 	public Map<String, Object> insertLent(Map<String, Object> lent) {
 		 Map<String, Object> rMap = new HashMap<>();
 		 int result = lentDAO.insertLent(lent);
-		 rMap.put("msg", result==1?"입력완료":"입력 실패");
+		 rMap.put("msg", result==1?"대여 입력완료":"대여 입력 실패");
 		 return rMap;
 	}
 	public Map<String, Object> updateLent(Map<String, Object> lent) {
@@ -35,6 +35,10 @@ public class LentServiceDAOImpl implements LentServiceDAO {
 	}
 	public Map<String, Object> selectLent(int lNum) {
 		return lentDAO.selectLent(lNum);
+	}
+	@Override
+	public List<Map<String, Object>> selectNoLentBookList() {
+		return lentDAO.selectNoLentBookList();
 	}
 
 

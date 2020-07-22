@@ -16,7 +16,7 @@
 		<td>${book.b_num}</td>
 	</tr>
 	<tr>
-		<th>책이름</th>
+		<th>도서명</th>
 		<td><input type="text" name="b_title" value="${book.b_title}"></td>
 	</tr>
 	<tr>
@@ -28,7 +28,7 @@
 		<td><input type="text" name="b_dmc" value="${book.b_dmc}"></td>
 	</tr>
 	<tr>
-		<th>등록일</th>
+		<th>출판일</th>
 		<td>${book.b_credat}</td>
 	</tr>
 	<tr>

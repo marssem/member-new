@@ -118,8 +118,8 @@ public class LentDAOImpl implements LentDAO {
 		try {
 			con = Connector.open();
 			String sql = "select l.*, m.m_name, b.b_title from lent l, member m, book b\r\n" + 
-					"where l.m_num=m.m_num\r\n" + 
-					"and b.b_num=l.b_num;";
+					" where l.m_num=m.m_num\r\n" + 
+					" and b.b_num=l.b_num ";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while(rs.next()) {
@@ -132,7 +132,6 @@ public class LentDAOImpl implements LentDAO {
 				map.put("m_name", rs.getString("m_name"));
 				map.put("b_title", rs.getString("b_title"));
 				LentList.add(map);
-
 			}
 		} catch(Exception e) {
 			e.printStackTrace();

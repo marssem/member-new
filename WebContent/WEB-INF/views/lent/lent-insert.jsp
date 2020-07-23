@@ -12,7 +12,7 @@
 		<table border="1">
 			<tr>
 				<th>대여자</th>
-				<td><input type="number" name="m_num"></td>
+				<td><input type="text" name="m_num"></td>
 			</tr>
 			<tr>
 				<th>대여할책</th>
